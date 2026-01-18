@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Piwniczka</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+   
+    <div id="header">
+        <button class="nav-but" id="home-but">Home</button>
+        <button class="nav-but" id="drinks-but">Trunki</button>
+        <button class="nav-but" id="recipies-but">Przepisy</button>
+        
+       
+        <button class="nav-but" id="ingr-base-but">Baza składników</button>
+    </div>
+    <div id="body" class="sample-body-home">
+        <div id="app-information" class="">
+            <p id="info-text">
+                Niniejsza aplikacja słuzy ułatwieniu zarządzania wyrobów kraftowych alkoholowych stworzonych w domu.
+                Kazdy trunek zawiera informacje kiedy został nastawiony moszczu do produkcji wina, piwa, cydru bądź nalewki.
+                Do kazdego trunku załączony jest równiez przepis w celu poźniejszego łatwiejszego odtworzenia trunku.
+                W przyszlości planuje dodać informacje o uzyskiwanych profilach smakowych produków których fermentacja się zakończyła.
+                Planowany jest takze kalkulator szacunkowej zawartości alkoholu trunku oraz strona główna któza zastąpi niniejsza stronę,
+                na której bedą pokazywane rózne statystyki (np. ulubiony przepis, najstarszy trunek, przypomnienie o zblizajacym sie koncu fermentacji) 
+            </p>
+        </div>
+        <div id="drinks-menu" class="">
+            <button  id="show-add-drink-but">Dodaj trunek..</button>
+            <ul id="drinks-list" class="menu">
+               <!--Dynamic Generated List-->
+            </ul>
+        </div>
+        <div id="recipe-menu" class="">
+            <button  id="show-add-recipe-but">Dodaj przepis..</button>
+            <ul id="recipe-list" class="menu">
+                <!--Dynamic Generated List-->
+            </ul>
+        </div>
+    </div>
+
+    
+    <div id="universal-modal"></div>
+
+    <div class="lightbox" id="recipe-modal">
+
+        <div id="add-recipe-lightbox">
+            <form id="add-recipe-form">
+                <a href="#" class="exit" id="exit-add-recipe-modal">X</a>
+                Wprowadz nazwe:
+                <input type="text" id="name-area" placeholder="Nazwa..." />
+                <label for="recipe-type">Wybierz typ przepisu:</label>
+                <select id="recipe-type">
+                    <option value="">-- Wybierz typ --</option>
+                    <option value="Beer">Piwo</option>
+                    <option value="Wine">Wino</option>
+                    <option value="Cider">Cydr</option>
+                    <option value="Strong">Nalewka</option>
+                </select>
+                <ol id="dynamic-steps-list">
+                    <!--Dynamic Genrated List-->
+                </ol>
+                <a href="#" id="add-next-step">Dodaj kolejny krok+</a>
+                <ol id="dynamic-ingr-list-select">
+
+
+                </ol>
+                <select  class="dynamic-ingr-select">
+                   <!--Dynamic Generated Select-->
+                </select>
+                <button type="submit" id="submit-recipe">Dodaj przepis+</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="lightbox" id="add-drink-modal">
+        <div id="add-drink-lightbox">
+            <form>
+            <a href="#" class="exit" id="exit-add-drink-modal">X</a>
+            <p for="name">Dodaj nazwę trunku:</p>
+            <input type="text" id="drink-name-text">
+            <p for="drinks">Wybierz typ trunku:</p>
+            <select id="drinks-type">
+                <option value="Beer">Piwo</option>
+                <option value="Wine">Wino</option>
+                <option value="Cider">Cydr</option>
+                <option value="Strong">Nalewka</option>
+            </select>
+            <p for="recipies">Wybierz przepis:</p>
+            <select id="recipies">
+                <!--Dynamic Generated Options-->
+            </select>
+            <button type="submit">Dodaj trunek+</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="" id="ingr-base-modal">
+        <div id="ingr-base-lightbox">
+            <a href="" class="exit" id="exit-ingr-base">X</a>
+            <p id="ingr-list-name">Lista dostepnych składników:</p>
+            <div id="ingr-list">
+                <ul id="dyn-ingr-list">
+                    <!--Dynamic List-->
+                </ul>
+            </div>
+            <div id="add-ingr">
+                <form>
+                    Podaj nazwe składnika:
+                    <input type="text" id="ingr-name-text" placeholder="Nazwa skladnika...">
+                    <button type="submit" id="#ingr-add-butt">Dodaj składnik</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    
+        
+    <script type="module" src="app.js"></script>
+    <script type="module" src="ingrBase.js"></script>
+    <script type="module" src="addRecipe.js"></script>
+    
+</body>
+</html>

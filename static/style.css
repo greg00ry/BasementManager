@@ -1,0 +1,548 @@
+/* ========================================= */
+/*              GLOBAL RESET                 */
+/* ========================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #EB3700;
+    --primary-hover: #c42e00;
+    --background-color: #f4f5f7;
+    --surface-color: #ffffff;
+    --text-primary: #172b4d;
+    --text-secondary: #5e6c84;
+    --border-color: #dfe1e6;
+    --shadow-sm: 0 1px 2px rgba(9, 30, 66, 0.25);
+    --shadow-hover: 0 4px 8px rgba(9, 30, 66, 0.25);
+    --radius: 8px;
+    --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+}
+
+body {
+    font-family: var(--font-family);
+    background-color: var(--background-color);
+    color: var(--text-primary);
+    line-height: 1.5;
+    font-size: 14px;
+    min-height: 100vh;
+}
+
+/* ========================================= */
+/*              HEADER & NAV                 */
+/* ========================================= */
+#header {
+    background-color: var(--surface-color);
+    padding: 0 24px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid var(--border-color);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    gap: 12px;
+}
+
+.nav-but {
+    background: transparent;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    color: var(--text-secondary);
+    font-weight: 500;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.nav-but:hover {
+    background-color: rgba(9, 30, 66, 0.08);
+    color: var(--text-primary);
+}
+
+.nav-but.active {
+    background-color: rgba(235, 55, 0, 0.1);
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+/* ========================================= */
+/*              MAIN LAYOUT                  */
+/* ========================================= */
+#body {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 24px;
+}
+
+/* App Information Section */
+#app-information {
+    background-color: var(--surface-color);
+    padding: 24px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    margin-bottom: 24px;
+    display: none; /* Controlled by JS */
+}
+
+#app-information.active {
+    display: flex;
+    flex-direction: column;
+}
+
+#info-text {
+    font-size: 16px;
+    color: var(--text-primary);
+}
+
+/* ========================================= */
+/*              MENUS & LISTS                */
+/* ========================================= */
+#drinks-menu, #recipe-menu {
+    display: none; /* Controlled by JS */
+    flex-direction: column;
+}
+
+#drinks-menu.active, #recipe-menu.active {
+    display: flex;
+}
+
+/* Action Buttons (Add Drink/Recipe) */
+#show-add-drink-but, #show-add-recipe-but {
+    align-self: flex-start;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: var(--shadow-sm);
+    transition: background 0.2s ease;
+    margin-bottom: 24px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+#show-add-drink-but:hover, #show-add-recipe-but:hover {
+    background-color: var(--primary-hover);
+    box-shadow: var(--shadow-hover);
+}
+
+/* Grid Layout for items */
+#drinks-list, #recipe-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 24px;
+    list-style: none;
+}
+
+/* ========================================= */
+/*              ITEM CARDS                   */
+/* ========================================= */
+.drinks-bars {
+    background-color: var(--surface-color);
+    border-radius: var(--radius);
+    border: 1px solid var(--border-color);
+    padding: 20px;
+    position: relative;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.drinks-bars:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+}
+
+/* Type Badge */
+.drinks-bars #type {
+    display: inline-block;
+    background-color: rgba(235, 55, 0, 0.1);
+    color: var(--primary-color);
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    width: fit-content;
+}
+
+/* Drink Name */
+.drinks-bars #name {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+}
+
+/* Meta info */
+.drinks-bars #created, .drinks-bars #steps {
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* Recipe Link Button */
+.drinks-bars #recipe {
+    margin-top: auto;
+    padding-top: 16px;
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 14px;
+    border-radius: 4px;
+    display: inline-block;
+}
+
+.drinks-bars #recipe:hover {
+    text-decoration: underline;
+}
+
+/* Delete Button */
+.drinks-bars #drink-delete-but {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 18px;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.2s ease, color 0.2s ease;
+}
+
+.drinks-bars:hover #drink-delete-but {
+    opacity: 1;
+}
+
+.drinks-bars #drink-delete-but:hover {
+    color: #e53935; /* Red for delete action */
+}
+
+/* ========================================= */
+/*              MODALS                       */
+/* ========================================= */
+/* Backdrop shared styles */
+.lightbox, #ingr-base-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(9, 30, 66, 0.54);
+    z-index: 2000;
+    display: none; /* Hidden by default */
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(2px);
+}
+
+.lightbox.active, #ingr-base-modal.active {
+    display: flex;
+}
+
+/* Modal Content Box */
+#add-drink-lightbox, 
+#add-recipe-lightbox, 
+#ingr-base-lightbox, 
+.modal-content {
+    background-color: var(--surface-color);
+    border-radius: var(--radius);
+    padding: 32px;
+    width: 100%;
+    max-width: 500px;
+    box-shadow: 0 8px 16px -4px rgba(9, 30, 66, 0.25), 0 0 0 1px rgba(9, 30, 66, 0.08);
+    position: relative;
+    max-height: 90vh;
+    overflow-y: auto;
+    animation: modalSlideUp 0.3s ease-out;
+}
+
+/* Animations */
+@keyframes modalSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Modal Headers */
+.lightbox h2, .lightbox h3 {
+    margin-bottom: 24px;
+    color: var(--text-primary);
+    font-size: 20px;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 12px;
+}
+
+/* Exit Button (Close X) */
+.exit {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    line-height: 1;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: color 0.2s;
+    text-decoration: none;
+}
+
+.exit:hover {
+    color: var(--text-primary);
+}
+
+/* ========================================= */
+/*              FORMS                        */
+/* ========================================= */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+form label {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    letter-spacing: 0.5px;
+    margin-bottom: -8px; /* Close to input */
+}
+
+form input[type="text"],
+form input[type="number"],
+form select,
+form textarea {
+    padding: 10px 12px;
+    border: 2px solid var(--border-color);
+    border-radius: 4px;
+    font-size: 14px;
+    color: var(--text-primary);
+    background-color: #fafbfc;
+    transition: border-color 0.2s, background-color 0.2s;
+    width: 100%;
+}
+
+form input:focus,
+form select:focus,
+form textarea:focus {
+    outline: none;
+    background-color: var(--surface-color);
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(235, 55, 0, 0.2);
+}
+
+/* Submit Buttons inside forms */
+form button[type="submit"], 
+.submit-btn,
+#add-ingr button[type="submit"] {
+    margin-top: 16px;
+    padding: 12px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+form button[type="submit"]:hover,
+#add-ingr button[type="submit"]:hover {
+    background-color: var(--primary-hover);
+}
+
+/* ========================================= */
+/*            RECIPE FORM DYNAMIC            */
+/* ========================================= */
+#add-next-step {
+    display: inline-block;
+    width: fit-content;
+    color: var(--primary-color);
+    font-weight: 600;
+    font-size: 13px;
+    text-decoration: none;
+    margin-top: 4px;
+    margin-bottom: 8px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    transition: background 0.1s;
+}
+
+#add-next-step:hover {
+    background-color: rgba(235, 55, 0, 0.1);
+}
+
+#dynamic-steps-list, 
+#dynamic-ingr-list-select {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 8px;
+}
+
+/* Dynamic Step Item */
+.step {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.step span {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    white-space: nowrap;
+    min-width: 50px;
+}
+
+/* Dynamic Ingredient Item */
+#dynamic-ingr-list-select li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f4f5f7; /* Very light grey */
+    padding: 8px 12px;
+    border-radius: 4px;
+    border: 1px solid var(--border-color);
+    font-size: 14px;
+    color: var(--text-primary);
+}
+
+/* Shared Delete Button (Steps & Ingrs) */
+.delete-dynamic-ingr {
+    color: #e53935;
+    font-weight: 700;
+    text-decoration: none;
+    margin-left: 8px;
+    padding: 4px;
+    line-height: 1;
+    border-radius: 4px;
+    transition: background 0.2s;
+    font-size: 16px;
+}
+
+.delete-dynamic-ingr:hover {
+    background-color: rgba(229, 57, 53, 0.1);
+}
+
+/* Ingredient Base List styling */
+#dyn-ingr-list {
+    list-style: none;
+    max-height: 200px; 
+    overflow-y: auto;
+    margin-bottom: 16px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+}
+
+#dyn-ingr-list li {
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--border-color);
+    font-size: 14px;
+}
+
+#dyn-ingr-list li:last-child {
+    border-bottom: none;
+}
+    border: none;
+    border-radius: 4px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+form button[type="submit"]:hover {
+    background-color: var(--primary-hover);
+}
+
+/* ========================================= */
+/*              UNIVERSAL MODAL              */
+/* ========================================= */
+#universal-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 3000; /* Highest z-index */
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+#universal-modal.show {
+    display: flex;
+}
+
+#universal-modal .modal-content {
+    max-width: 400px;
+    text-align: center;
+    border-top: 4px solid var(--primary-color); /* Default accent */
+}
+
+/* Modal variants */
+.modal-error { border-top-color: #e53935 !important; }
+.modal-success { border-top-color: #36b37e !important; }
+
+#universal-modal button {
+    margin-top: 20px;
+    padding: 8px 24px;
+    background: var(--text-secondary);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#universal-modal button:hover {
+    background: var(--text-primary);
+}
+
+/* ========================================= */
+/*              RESPONSIVE                   */
+/* ========================================= */
+@media (max-width: 768px) {
+    #header {
+        padding: 0 16px;
+        height: auto;
+        flex-wrap: wrap;
+        padding-bottom: 12px;
+    }
+    
+    .nav-but {
+        flex: 1 1 auto;
+        text-align: center;
+        font-size: 13px;
+        padding: 8px;
+    }
+
+    #body {
+        padding: 16px;
+    }
+
+    #drinks-list, #recipe-list {
+        grid-template-columns: 1fr;
+    }
+}
