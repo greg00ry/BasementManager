@@ -21,6 +21,7 @@ Aplikacja do zarządzania domowymi trunkami (wino, piwo, cydr, nalewki). Umożli
 - Vanilla JavaScript (ES6 Modules)
 - HTML5 + CSS3
 - Architektura Singleton
+- AI CSS (Autorski prompt-framework, dostępny na moim github)
 
 ## 🚀 Instalacja
 
